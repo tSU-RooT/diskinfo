@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	//	"github.com/mattn/go-runewidth"
 	"github.com/nsf/termbox-go"
 	"github.com/tSU-RooT/diskinfo/atasmart"
 )
