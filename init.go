@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"flag"
 	"fmt"
 	"github.com/nsf/termbox-go"
 	"github.com/tSU-RooT/diskinfo/atasmart"
@@ -13,13 +14,20 @@ import (
 var (
 	termWidth  int
 	termHeight int
+	masking    bool
 )
+
+func init() {
+	flag.BoolVar(&masking, "mask-serial", false, "Mask serial-number (01234X -> ******)")
+}
 
 func main() {
 	os.Exit(_main())
 }
 
 func _main() int {
+	flag.Parse()
+
 	if os.Getuid() != 0 && !atasmart.DebugEnabled {
 		fmt.Fprint(os.Stderr, "Root privileges are required\n")
 		return 1

@@ -68,7 +68,14 @@ func (v *view) paintData(disk *atasmart.SkDisk) {
 	text = fmt.Sprintf("Firmware: %s", disk.Data.Firmware)
 	drawText(text, 2, y, termbox.ColorWhite, termbox.ColorDefault)
 	y++
-	text = fmt.Sprintf("Serial: %s", disk.Data.Serial)
+	if !masking {
+		text = fmt.Sprintf("Serial: %s", disk.Data.Serial)
+	} else {
+		text = "Serial: "
+		for i := 0; i < len(disk.Data.Serial); i++ {
+			text += "*"
+		}
+	}
 	drawText(text, 2, y, termbox.ColorWhite, termbox.ColorDefault)
 
 	y = 4
